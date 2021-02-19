@@ -130,6 +130,20 @@ namespace Procurement.ViewModel
             }
         }
 
+        private bool _useShortRecipeDisplayDescriptions;
+        public bool UseShortRecipeDisplayDescriptions
+        {
+            get { return _useShortRecipeDisplayDescriptions; }
+            set
+            {
+                _useShortRecipeDisplayDescriptions = value;
+
+                OnPropertyChanged();
+                Settings.UserSettings["UseShortRecipeDisplayDescriptions"] = Convert.ToString(value);
+                Settings.Save();
+            }
+        }
+
         private List<TabInfo> stashTabs;
         private List<string> _characters;
 
@@ -201,7 +215,7 @@ namespace Procurement.ViewModel
 
         private void refreshCharacters()
         {
-            this.Characters = ApplicationState.Model.GetCharacters().Where(c => c.League == CurrentLeague).Select(c => c.Name).ToList();
+            this.Characters = ApplicationState.Model.GetCharacters(ApplicationState.CurrentRealm).Where(c => c.League == CurrentLeague).Select(c => c.Name).ToList();
         }
 
         internal void RecipeTabChecked(string tabName)

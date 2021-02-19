@@ -18,6 +18,8 @@
       <Item name="Prismatic Ring"/>
       <Item name="Opal Ring"/>
       <Item name="Steel Ring"/>
+      <Item name="Vermillion Ring"/>
+      <Item name="Cerulean Ring"/>
     </GearBaseType>
     <GearBaseType name="Amulet">
       <Item name="Coral Amulet"/>
@@ -1483,6 +1485,7 @@
       <Item name="Tornado Wand"/>
       <Item name="Prophecy Wand"/>
       <Item name="Profane Wand"/>
+      <Item name="Convoking Wand"/>
     </GearBaseType>
 
     <!--Source data: https://pathofexile.gamepedia.com/Divination_card-->
@@ -1492,27 +1495,39 @@
       <Item name="A Dab of Ink"/>
       <Item name="A Mother's Parting Gift"/>
       <Item name="Abandoned Wealth"/>
+      <Item name="Akil's Prophecy"/>
+      <Item name="Alluring Bounty"/>
+      <Item name="Alone in the Darkness"/>
       <Item name="Anarchy's Price"/>
+      <Item name="Arrogance of the Vaal"/>
       <Item name="Assassin's Favour"/>
       <Item name="Atziri's Arsenal"/>
       <Item name="Audacity"/>
+      <Item name="Azyran's Reward"/>
       <Item name="Beauty Through Death"/>
       <Item name="Birth of the Three"/>
       <Item name="Blessing of God"/>
       <Item name="Blind Venture"/>
+      <Item name="Boon of Justice"/>
       <Item name="Boon of the First Ones"/>
       <Item name="Boundless Realms"/>
       <Item name="Bowyer's Dream"/>
+      <Item name="Buried Treasure"/>
+      <Item name="Burning Blood"/>
       <Item name="Call to the First Ones"/>
       <Item name="Cartographer's Delight"/>
       <Item name="Chaotic Disposition"/>
       <Item name="Coveted Possession"/>
+      <Item name="Dark Dreams"/>
+      <Item name="Dark Temptation"/>
       <Item name="Death"/>
+      <Item name="Demigod's Wager"/>
       <Item name="Destined to Crumble"/>
       <Item name="Dialla's Subjugation"/>
       <Item name="Doedre's Madness"/>
       <Item name="Dying Anguish"/>
       <Item name="Earth Drinker"/>
+      <Item name="Echoes of Love"/>
       <Item name="Emperor of Purity"/>
       <Item name="Emperor's Luck"/>
       <Item name="Forbidden Power"/>
@@ -1530,6 +1545,7 @@
       <Item name="Hunter's Resolve"/>
       <Item name="Hunter's Reward"/>
       <Item name="Immortal Resolve"/>
+      <Item name="Imperial Legacy"/>
       <Item name="Jack in the Box"/>
       <Item name="Lantador's Lost Love"/>
       <Item name="Last Hope"/>
@@ -1545,23 +1561,32 @@
       <Item name="Merciless Armament"/>
       <Item name="Might is Right"/>
       <Item name="Mitts"/>
+      <Item name="Monochrome"/>
+      <Item name="More is Never Enough"/>
       <Item name="No Traces"/>
+      <Item name="Nook's Crown"/>
       <Item name="Perfection"/>
       <Item name="Pride Before the Fall"/>
+      <Item name="Pride of the First Ones"/>
       <Item name="Prosperity"/>
       <Item name="Rain of Chaos"/>
       <Item name="Rain Tempter"/>
       <Item name="Rats"/>
       <Item name="Rebirth"/>
+      <Item name="Remembrance"/>
+      <Item name="Sambodhi's Vow"/>
       <Item name="Scholar of the Seas"/>
+      <Item name="Seven Years Bad Luck"/>
       <Item name="Shard of Fate"/>
       <Item name="Struck by Lightning"/>
       <Item name="The Admirer"/>
       <Item name="The Aesthete"/>
+      <Item name="The Archmage's Right Hand"/>
       <Item name="The Arena Champion"/>
       <Item name="The Army of Blood"/>
       <Item name="The Artist"/>
       <Item name="The Avenger"/>
+      <Item name="The Bargain"/>
       <Item name="The Battle Born"/>
       <Item name="The Beast"/>
       <Item name="The Betrayal"/>
@@ -1581,10 +1606,14 @@
       <Item name="The Coming Storm"/>
       <Item name="The Conduit"/>
       <Item name="The Cursed King"/>
+      <Item name="The Damned"/>
       <Item name="The Dapper Prodigy"/>
       <Item name="The Dark Mage"/>
       <Item name="The Darkest Dream"/>
+      <Item name="The Deal"/>
       <Item name="The Deceiver"/>
+      <Item name="The Deep Ones"/>
+      <Item name="The Demon"/>
       <Item name="The Demoness"/>
       <Item name="The Devastator"/>
       <Item name="The Doctor"/>
@@ -1600,12 +1629,14 @@
       <Item name="The Enlightened"/>
       <Item name="The Ethereal"/>
       <Item name="The Explorer"/>
+      <Item name="The Eye of Terror"/>
       <Item name="The Eye of the Dragon"/>
       <Item name="The Fathomless Depths"/>
       <Item name="The Feast"/>
       <Item name="The Fiend"/>
       <Item name="The Fletcher"/>
       <Item name="The Flora's Gift"/>
+      <Item name="The Fool"/>
       <Item name="The Formless Sea"/>
       <Item name="The Forsaken"/>
       <Item name="The Fox"/>
@@ -1614,9 +1645,11 @@
       <Item name="The Gemcutter"/>
       <Item name="The Gentleman"/>
       <Item name="The Gladiator"/>
+      <Item name="The Golden Era"/>
       <Item name="The Hale Heart"/>
       <Item name="The Harvester"/>
       <Item name="The Hermit"/>
+      <Item name="The Heroic Shot"/>
       <Item name="The Hoarder"/>
       <Item name="The Hunger"/>
       <Item name="The Immortal"/>
@@ -1628,24 +1661,31 @@
       <Item name="The Iron Bard"/>
       <Item name="The Jester"/>
       <Item name="The Jeweller's Boon"/>
+      <Item name="The Journey"/>
       <Item name="The King's Blade"/>
       <Item name="The King's Heart"/>
+      <Item name="The Landing"/>
       <Item name="The Last One Standing"/>
       <Item name="The Lich"/>
       <Item name="The Life Thief"/>
       <Item name="The Lion"/>
       <Item name="The Lord in Black"/>
+      <Item name="The Lord of Celebration"/>
       <Item name="The Lover"/>
       <Item name="The Lunaris Priestess"/>
+      <Item name="The Mad King"/>
       <Item name="The Master Artisan"/>
       <Item name="The Master"/>
       <Item name="The Mayor"/>
       <Item name="The Mercenary"/>
+      <Item name="The Messenger"/>
       <Item name="The Metalsmith's Gift"/>
+      <Item name="The Mountain"/>
       <Item name="The Nurse"/>
       <Item name="The Oath"/>
       <Item name="The Obscured"/>
       <Item name="The Offering"/>
+      <Item name="The Old Man"/>
       <Item name="The One With All"/>
       <Item name="The Opulent"/>
       <Item name="The Pack Leader"/>
@@ -1654,7 +1694,9 @@
       <Item name="The Poet"/>
       <Item name="The Polymath"/>
       <Item name="The Porcupine"/>
+      <Item name="The Price of Loyalty"/>
       <Item name="The Price of Protection"/>
+      <Item name="The Primordial"/>
       <Item name="The Professor"/>
       <Item name="The Puzzle"/>
       <Item name="The Queen"/>
@@ -1670,9 +1712,12 @@
       <Item name="The Scarred Meadow"/>
       <Item name="The Scavenger"/>
       <Item name="The Scholar"/>
+      <Item name="The Seeker"/>
       <Item name="The Sephirot"/>
+      <Item name="The Side Quest"/>
       <Item name="The Sigil"/>
       <Item name="The Siren"/>
+      <Item name="The Skeleton"/>
       <Item name="The Soul"/>
       <Item name="The Spark and the Flame"/>
       <Item name="The Spoiled Prince"/>
@@ -1707,6 +1752,7 @@
       <Item name="The Wilted Rose"/>
       <Item name="The Wind"/>
       <Item name="The Witch"/>
+      <Item name="The Wolf's Legacy"/>
       <Item name="The Wolf's Shadow"/>
       <Item name="The Wolf"/>
       <Item name="The Wolven King's Bite"/>
@@ -1714,6 +1760,7 @@
       <Item name="The World Eater"/>
       <Item name="The Wrath"/>
       <Item name="The Wretched"/>
+      <Item name="Thirst for Knowledge"/>
       <Item name="Three Faces in the Dark"/>
       <Item name="Three Voices"/>
       <Item name="Thunderous Skies"/>
@@ -1721,7 +1768,10 @@
       <Item name="Tranquillity"/>
       <Item name="Treasure Hunter"/>
       <Item name="Turn the Other Cheek"/>
+      <Item name="Vanity"/>
+      <Item name="Vile Power"/>
       <Item name="Vinia's Token"/>
+      <Item name="Void of the Elements"/>
       <Item name="Volatile Power"/>
       <Item name="Wealth and Power"/>
     </GearBaseType>
@@ -1754,6 +1804,8 @@
                  baseType="Golden Buckler" />
     <FatedUnique targetName="Cameria's Maul" fatedName="Cameria's Avarice" prophecyName="Cold Greed"
                  baseType="Gavel" />
+    <FatedUnique targetName="Chober Chaber" fatedName="Chaber Cairn" prophecyName="Faith Exhumed"
+                 baseType="Great Mallet" />
     <FatedUnique targetName="Eclipse Solaris" fatedName="Corona Solaris" prophecyName="Blinding Light"
                  baseType="Crystal Wand" />
     <FatedUnique targetName="Craghead" fatedName="Cragfall" prophecyName="Heavy Blows"
@@ -1782,6 +1834,8 @@
                  baseType="Leather Hood" />
     <FatedUnique targetName="Geofri's Baptism" fatedName="Geofri's Devotion" prophecyName="Black Devotion"
                  baseType="Brass Maul" />
+    <FatedUnique targetName="Geofri's Crest" fatedName="Geofri's Legacy" prophecyName="The Bishop's Legacy"
+                 baseType="Great Crown" />
     <FatedUnique targetName="Wondertrap" fatedName="Greedtrap" prophecyName="Greed's Folly"
                  baseType="Velvet Slippers" />
     <FatedUnique targetName="Hrimsorrow" fatedName="Hrimburn" prophecyName="Fire and Ice"
@@ -1826,6 +1880,8 @@
                  baseType="Gold Amulet" />
     <FatedUnique targetName="The Screaming Eagle" fatedName="The Gryphon" prophecyName="The Apex Predator"
                  baseType="Jade Hatchet" />
+    <FatedUnique targetName="Iron Heart" fatedName="The Iron Fortress" prophecyName="Battle Hardened"
+                 baseType="Crusader Plate" />
     <FatedUnique targetName="The Magnate" fatedName="The Nomad" prophecyName="The Great Leader of the North"
                  baseType="Studded Belt" />
     <FatedUnique targetName="Springleaf" fatedName="The Oak" prophecyName="Nature's Resilience"
@@ -1846,6 +1902,8 @@
                  baseType="Iron Ring" />
     <FatedUnique targetName="Bramblejack" fatedName="Wall of Brambles" prophecyName="The King and the Brambles"
                  baseType="Plate Vest" />
+    <FatedUnique targetName="Matua Tupuna" fatedName="Whakatutuki o Matua" prophecyName="The Mentor"
+                 baseType="Tarnished Spirit Shield" />
     <FatedUnique targetName="Briskwrap" fatedName="Wildwrap" prophecyName="Last of the Wildmen"
                  baseType="Strapped Leather" />
     <FatedUnique targetName="Windscream" fatedName="Windshriek" prophecyName="Darktongue's Shriek"

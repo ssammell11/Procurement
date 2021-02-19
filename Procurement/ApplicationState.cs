@@ -14,7 +14,7 @@ namespace Procurement
         /// Application version to check for latest release.
         /// Must begin with "Procurement ". See: VersionChecker.cs
         /// </summary>
-        public static string Version = "Procurement 1.25.2";
+        public static string Version = "Procurement 1.29.0";
         public static POEModel Model = new POEModel();
         public static Dictionary<string, Stash> Stash = new Dictionary<string, Stash>();
         public static Dictionary<string, Item> Inventory = new Dictionary<string, Item>();
@@ -54,7 +54,7 @@ namespace Procurement
                     return;
 
                 currentLeague = value;
-                Characters = Model.GetCharacters().Where(c => c.League == value).ToList();
+                Characters = Model.GetCharacters(CurrentRealm).Where(c => c.League == value).ToList();
                 CurrentCharacter = Characters.FirstOrDefault();
                 if (LeagueChanged != null)
                     LeagueChanged(Model, new PropertyChangedEventArgs("CurrentLeague"));
@@ -70,6 +70,8 @@ namespace Procurement
                 allCharactersByLeague = value;
             }
         }
+
+        public static string CurrentRealm { get; set; }
 
         public static void SetDefaults()
         {

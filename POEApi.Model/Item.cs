@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using POEApi.Model.JSONProxy;
 
 namespace POEApi.Model
 {
@@ -54,6 +55,9 @@ namespace POEApi.Model
 
         public List<string> CraftedMods { get; set; }
         public List<string> VeiledMods { get; set; }
+        public List<string> FracturedMods { get; set; }
+
+        public IncubatedDetails IncubatedDetails { get; set; }
 
         public int TradeX { get; set; }
         public int TradeY { get; set; }
@@ -62,8 +66,17 @@ namespace POEApi.Model
         public int ItemLevel { get; set; }
         public bool Shaper { get; set; }
         public bool Elder { get; set; }
+        public bool Synthesised { get; set; }
+        public bool Fractured { get; set; }
         public int StackSize { get; set; }
         public int MaxStackSize { get; set; }
+        public Rarity Rarity { get; set; }
+
+        public string BackgroundUrl { get; private set; }
+
+        public bool HasBackground => string.IsNullOrEmpty(BackgroundUrl) == false;
+
+        public virtual bool IsGear => false;
 
         protected Item(JSONProxy.Item item)
         {
@@ -87,12 +100,16 @@ namespace POEApi.Model
             CraftedMods = item.CraftedMods ?? new List<string>();
             VeiledMods = item.VeiledMods ?? new List<string>();
             EnchantMods = item.EnchantMods ?? new List<string>();
+            FracturedMods = item.FracturedMods ?? new List<string>();
             FlavourText = item.FlavourText;
             ItemLevel = item.Ilvl;
             Shaper = item.Shaper;
             Elder = item.Elder;
+            Synthesised = item.Synthesised;
+            Fractured = item.Fractured;
             StackSize = item.StackSize;
             MaxStackSize = item.MaxStackSize;
+            IncubatedDetails = item.IncubatedItem;
 
             if (item.Properties != null)
             {
@@ -103,6 +120,11 @@ namespace POEApi.Model
                     IsQuality = true;
                     Quality = ProxyMapper.GetQuality(item.Properties);
                 }
+
+                if (Properties.Any(p => p.Name == "Radius"))
+                {
+                    Radius = Properties.First(p => p.Name == "Radius").Values[0].Item1;
+                }
             }
 
             Corrupted = item.Corrupted;
@@ -111,19 +133,26 @@ namespace POEApi.Model
 
             TradeX = X;
             TradeY = Y;
-            TradeInventoryId =InventoryId;
+            TradeInventoryId = InventoryId;
             Character = string.Empty;
+            Rarity = GetRarity(item);
+
+            if (item.Elder || item.Shaper)
+                BackgroundUrl = ItemBackgroundUrlBuilder.GetUrl(this);
         }
+
+        public string Radius { get; set; }
+
         private string getIconUrl(string url)
         {
             Uri uri;
             if (Uri.TryCreate(url, UriKind.Absolute, out uri))
                 return url;
 
-            return "http://webcdn.pathofexile.com" + url;
+            return "https://webcdn.pathofexile.com" + url;
         }
 
-        protected Rarity getRarity(JSONProxy.Item item)
+        private Rarity GetRarity(JSONProxy.Item item)
         {
             //Looks like isRelic is coming across the wire as an additional field but coincidentally 9 was the correct frame type here.
             if (item.FrameType == 9 || item.IsRelic)

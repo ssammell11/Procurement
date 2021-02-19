@@ -8,7 +8,6 @@ namespace POEApi.Model
 {
     public class Gear : Item
     {
-        public Rarity Rarity { get; private set; }
         public List<Socket> Sockets { get; set; }
         public List<SocketableItem> SocketedItems { get; set; }
         public List<string> Implicitmods { get; set; }
@@ -16,9 +15,10 @@ namespace POEApi.Model
         public GearType GearType { get; set; }
         public string BaseType { get; set; }
 
+        public override bool IsGear => true;
+
         public Gear(JSONProxy.Item item) : base(item)
         {
-            Rarity = getRarity(item);
             Sockets = GetSockets(item);
             Explicitmods = item.ExplicitMods;
             SocketedItems = GetSocketedItems(item);
@@ -81,7 +81,17 @@ namespace POEApi.Model
                     pobData.AppendLine(Name);
                     pobData.AppendLine(TypeLine);
                     pobData.AppendLine($"Unique ID: {Id}");
-                    pobData.AppendLine($"Item Level: {ItemLevel}");
+
+                    var itemType = GetSpecialItemType();
+                    if (string.IsNullOrEmpty(itemType) == false)
+                        pobData.AppendLine(itemType);
+
+                    if (Corrupted)
+                        pobData.AppendLine(nameof(Corrupted));
+
+                    if (string.IsNullOrEmpty(Radius) == false)
+                        pobData.AppendLine($"Radius: {Radius}");
+
                     pobData.AppendLine($"Quality: {Quality}");
 
                     if (Sockets != null && Sockets.Any())
@@ -111,6 +121,11 @@ namespace POEApi.Model
                         Implicitmods.ForEach(x => pobData.AppendLine($"{{crafted}}{x}"));
                     }
 
+                    if (FracturedMods != null && FracturedMods.Any())
+                    {
+                        FracturedMods.ForEach(x => pobData.AppendLine($"{{fractured}}{x}"));
+                    }
+
                     if (Explicitmods != null && Explicitmods.Any())
                     {
                         Explicitmods.ForEach(x=> pobData.AppendLine(x));
@@ -129,6 +144,31 @@ namespace POEApi.Model
                     throw;
                 }
             }
+        }
+
+        private string GetSpecialItemType()
+        {
+            if (Elder)
+            {
+                return "Elder Item";
+            }
+
+            if (Shaper)
+            {
+                return "Shaper Item";
+            }
+
+            if (Fractured)
+            {
+                return "Fractured Item";
+            }
+
+            if (Synthesised)
+            {
+                return "Synthesised Item";
+            }
+
+            return null;
         }
     }
 }

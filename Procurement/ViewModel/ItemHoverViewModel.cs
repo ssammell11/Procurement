@@ -34,9 +34,11 @@ namespace Procurement.ViewModel
 
         public List<string> CraftedMods { get; set; }
         public List<string> VeiledMods { get; set; }
+        public List<string> FracturedMods { get; set; }
 
         public bool HasCraftedMods { get; private set; }
         public bool HasVeiledMods { get; private set; }
+        public bool HasFracturedMods { get; private set; }
         public bool IsProphecy { get; set; }
         public string ProphecyText { get; set; }
         public string ProphecyDifficultyText { get; set; }
@@ -61,6 +63,20 @@ namespace Procurement.ViewModel
 
         public int ExperienceNumerator { get; }
         public int ExperienceDenominator { get; }
+
+        public int IncubatorNumerator { get; }
+        public int IncubatorDenominator { get; }
+        public double IncubatorProgress { get; }
+        public string Incubating { get; set; }
+        public string IncubationLevel { get; set; }
+
+        public bool IsIncubatorProgressVisible
+        {
+            get
+            {
+                return Item.IncubatedDetails != null;
+            }
+        }
 
         public ItemHoverViewModel(Item item)
         {
@@ -89,6 +105,8 @@ namespace Procurement.ViewModel
             this.CraftedMods = item.CraftedMods;
             setVeiledMods(item);
 
+            this.FracturedMods = item.FracturedMods;
+
             SecondaryDescriptionText = item.SecDescrText;
             setTypeSpecificProperties(item);
 
@@ -100,12 +118,25 @@ namespace Procurement.ViewModel
                 ExperienceDenominator = gem.ExperienceDenominator;
             }
 
+            if (IsIncubatorProgressVisible)
+            {
+                IncubatorNumerator = item.IncubatedDetails.Progress;
+                IncubatorDenominator = item.IncubatedDetails.Total;
+                Incubating = $"Incubating {item.IncubatedDetails.Name}";
+                IncubationLevel =  $"Level {item.IncubatedDetails.Level}+ Monster Kills";
+                if (Item.IncubatedDetails.Total > 0)
+                {
+                    IncubatorProgress = Convert.ToDouble(item.IncubatedDetails.Progress) / Convert.ToDouble(item.IncubatedDetails.Total);
+                }
+            }
+
             // If an item has crafted mods but no true explicit mods:
             //   In game: the crafted mods are correctly separated from the previous section.
             //   On official web site: there is no seperator added before the previous section.
             this.HasCraftedMods = CraftedMods?.Count > 0;
             this.HasVeiledMods = VeiledMods?.Count > 0;
-            this.HasExplicitMods = ExplicitMods?.Count > 0 || HasCraftedMods || IsMirrored;
+            this.HasFracturedMods = FracturedMods?.Count > 0;
+            this.HasExplicitMods = ExplicitMods?.Count > 0 || HasFracturedMods || HasCraftedMods || IsMirrored;
             this.HasImplicitMods = ImplicitMods?.Count > 0;
             this.HasEnchantMods = item.EnchantMods.Count > 0;
             this.HasRequirements = Requirements?.Count > 0;
@@ -166,7 +197,10 @@ namespace Procurement.ViewModel
         private void setGearProperties(Item item, Gear gear)
         {
             this.IsGear = true;
-            this.ItemLevel = string.Format("Item Level : {0}", item.ItemLevel);
+            if (item.ItemLevel > 0)
+            {
+                this.ItemLevel = string.Format("Item Level : {0}", item.ItemLevel);
+            }
             this.Requirements = gear.Requirements;
             this.ImplicitMods = gear.Implicitmods;
         }

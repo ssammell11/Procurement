@@ -21,19 +21,6 @@ namespace Procurement.ViewModel
 {
     public class StashViewModel : ObservableBase
     {
-        private class TabContent
-        {
-            public int Index { get; set; }
-            public TabItem TabItem { get; set; }
-            public IStashControl Stash { get; set; }
-            public TabContent(int index, TabItem tabItem, IStashControl stash)
-            {
-                this.Index = index;
-                this.TabItem = tabItem;
-                this.Stash = stash;
-            }
-        }
-
         private List<TabContent> tabsAndContent;
         private StashView stashView;
         private List<IFilter> categoryFilter;
@@ -42,6 +29,8 @@ namespace Procurement.ViewModel
         private OrbType configuredOrbType;
         private bool currencyDistributionUsesCount;
         private string filter;
+
+        private const string _enableTabRefreshOnLocationChangedConfigName = "EnableTabRefreshOnLocationChanged";
 
         public string Filter
         {
@@ -146,6 +135,32 @@ namespace Procurement.ViewModel
             ScreenController.Instance.InvalidateRecipeScreen();
         });
 
+        public static DateTime LastAutomaticRefresh { get; protected set; }
+        public void OnClientLogFileChanged(object sender, ClientLogFileEventArgs e)
+        {
+            // All actions currently taken when the log file changes relate to refreshing staash tabs.  This checks
+            // first that we are logged in, and quits early if we are not.
+            if (!LoggedIn)
+                return;
+
+            lock (this)
+            {
+                if ((DateTime.Now - LastAutomaticRefresh).TotalSeconds <= 120)
+                    return;
+                LastAutomaticRefresh = DateTime.Now;
+
+                Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal,
+                    new Action(() =>
+                    {
+                        if (ScreenController.Instance.ButtonsVisible)
+                        {
+                            ScreenController.Instance.LoadRefreshViewUsed();
+                            ScreenController.Instance.InvalidateRecipeScreen();
+                        }
+                    }));
+            }
+        }
+
         public StashViewModel(StashView stashView)
         {
             this.stashView = stashView;
@@ -166,6 +181,17 @@ namespace Procurement.ViewModel
                 currencyDistributionUsesCount = true;
             else
                 configuredOrbType = (OrbType)Enum.Parse(typeof(OrbType), currencyDistributionMetric);
+
+            if (Settings.UserSettings.Keys.Contains(_enableTabRefreshOnLocationChangedConfigName))
+            {
+                var enabled = false;
+                if (bool.TryParse(Settings.UserSettings[_enableTabRefreshOnLocationChangedConfigName], out enabled)
+                    && enabled)
+                {
+                    ClientLogFileWatcher.ClientLogFileChanged -= OnClientLogFileChanged;
+                    ClientLogFileWatcher.ClientLogFileChanged += OnClientLogFileChanged;
+                }
+            }
         }
 
         private void getAvailableItems()
@@ -243,12 +269,12 @@ namespace Procurement.ViewModel
             scrollViewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
             TabControl tabControl = scrollViewer.TemplatedParent as TabControl;
 
-            selector.ContextMenu = getContextMenu(selector, tabControl);
+            selector.ContextMenu = GetContextMenu(selector, tabControl);
             selector.ContextMenu.Height = 550;
             selector.ContextMenu.IsOpen = true;
         }
 
-        private ContextMenu getContextMenu(Button target, TabControl tabControl)
+        private ContextMenu GetContextMenu(Button target, TabControl tabControl)
         {
             ContextMenu menu = new ContextMenu();
             menu.PlacementTarget = target;
@@ -258,12 +284,33 @@ namespace Procurement.ViewModel
             {
                 MenuItem menuItem = new MenuItem();
                 menuItem.Tag = item;
-                menuItem.Header = item.Tag.ToString();
+                TabVisuals tabVisuals = item.Tag as TabVisuals;
+                menuItem.Header = tabVisuals.Name;
+
+                if (tabVisuals.Colour != null)
+                {
+                    menuItem.Style = new Style();
+                    menuItem.BorderThickness = new Thickness(0);
+                    menuItem.Background = new SolidColorBrush(tabVisuals.Colour.WpfColor);
+                    menuItem.Foreground = new SolidColorBrush(ContrastColor(tabVisuals.Colour));
+                }
+
                 menuItem.Click += (o, e) => { closeAndSelect(menu, menuItem); };
                 menu.Items.Add(menuItem);
             }
 
             return menu;
+        }
+
+        private Color ContrastColor(Colour color)
+        {
+            // Counting the perceptive luminance - human eye favors green color...
+            double luminance = (0.299 * color.r + 0.587 * color.g + 0.114 * color.b) / 255;
+
+            if (luminance > 0.5)
+                return Color.FromRgb((byte)59, (byte)44, (byte)27);
+
+            return Color.FromRgb((byte)255, (byte)192, (byte)119);
         }
 
         private void closeAndSelect(ContextMenu menu, MenuItem menuItem)
@@ -284,7 +331,11 @@ namespace Procurement.ViewModel
                 var item = new TabItem
                 {
                     Header = StashHelper.GenerateTabImage(currentTab, false),
-                    Tag = currentTab.Name,
+                    Tag = new TabVisuals()
+                    {
+                        Name = currentTab.Name,
+                        Colour = currentTab.Colour
+                    },
                     HorizontalAlignment = HorizontalAlignment.Left,
                     VerticalAlignment = VerticalAlignment.Top,
                     Background = Brushes.Transparent,

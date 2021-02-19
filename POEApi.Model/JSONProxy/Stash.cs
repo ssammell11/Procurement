@@ -26,6 +26,14 @@ namespace POEApi.Model.JSONProxy
         public int DisplayMode { get; set; }
     }
 
+    public class IncubatedDetails
+    {
+        public string Name { get; set; }
+        public int Level { get; set; }
+        public int Progress { get; set; }
+        public int Total { get; set; }
+    }
+
     public class Item
     {
         public string Id { get; set; }
@@ -37,6 +45,8 @@ namespace POEApi.Model.JSONProxy
         public string League { get; set; }
         public bool Shaper { get; set; }
         public bool Elder { get; set; }
+        public bool Synthesised { get; set; }
+        public bool Fractured { get; set; }
         public string Name { get; set; }
         public string TypeLine { get; set; }
         public bool Identified { get; set; }
@@ -62,11 +72,12 @@ namespace POEApi.Model.JSONProxy
         public string Colour { get; set; }
         public bool Corrupted { get; set; }
         public bool AbyssJewel { get; set; }
-
+        public IncubatedDetails IncubatedItem { get; set; }
         public List<string> CosmeticMods { get; set; }
         public List<string> CraftedMods { get; set; }
         public List<string> EnchantMods { get; set; }
         public List<string> VeiledMods { get; set; }
+        public List<string> FracturedMods { get; set; }
         public int Ilvl { get; set; }
         public string ProphecyText { get; set; }
         public string ProphecyDiffText { get; set; }

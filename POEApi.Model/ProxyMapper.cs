@@ -209,6 +209,18 @@ namespace POEApi.Model
             {"Uul-Netol", BreachType.UulNetol}
         };
 
+        private static readonly Dictionary<string, LegionFaction> _legionMap = new Dictionary<string, LegionFaction>
+        {
+            //Splinters are called Timeless Eternal Empire Splinter
+            {"Eternal Empire", LegionFaction.EternalEmpire},
+            //Emblems are called Timeless Eternal Emblem
+            {"Eternal", LegionFaction.EternalEmpire},
+            {"Karui", LegionFaction.Karui},
+            {"Maraketh", LegionFaction.Maraketh},
+            {"Templar", LegionFaction.Templar},
+            {"Vaal", LegionFaction.Vaal}
+        };
+
         private static readonly Dictionary<string, TabType> _tabTypeMap = new Dictionary<string, TabType>
         {
             {"NormalStash", TabType.Normal},
@@ -219,6 +231,7 @@ namespace POEApi.Model
             {"QuadStash", TabType.Quad},
             {"MapStash", TabType.Map },
             {"FragmentStash", TabType.Fragment },
+            {"UniqueStash", TabType.Unique },
         };
 
         public static TabType GetTabType(string type)
@@ -309,6 +322,21 @@ namespace POEApi.Model
                 Logger.Log("ProxyMapper.GetBreachType Failed! ItemType = " + item.TypeLine);
 
                 return BreachType.Unknown;
+            }
+        }
+
+        public static LegionFaction GetLegionFaction(JSONProxy.Item item)
+        {
+            try
+            {
+                return _legionMap.First(m => item.TypeLine.Contains(m.Key)).Value;
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex);
+                Logger.Log("ProxyMapper.GetLegionFaction Failed! ItemType = " + item.TypeLine);
+
+                return LegionFaction.Unknown;
             }
         }
 

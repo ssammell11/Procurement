@@ -46,8 +46,6 @@
     <Gem name="Faster Casting Support" />
   </PopularGems>
   <DropOnlyGems>
-    <Gem name="Added Chaos Damage Support" />
-    <Gem name="Detonate Mines" />
     <Gem name="Empower Support" />
     <Gem name="Enhance Support" />
     <Gem name="Enlighten Support" />
@@ -89,10 +87,10 @@
     <List name="MyLeagues">
       <Item value="Standard" />
       <Item value="Hardcore" />
-      <Item value="Betrayal" />
-      <Item value="Hardcore Betrayal" />
-      <Item value="SSF Betrayal" />
-      <Item value="SSF Hardcore Betrayal" />
+      <Item value="Harvest" />
+      <Item value="Hardcore Harvest" />
+      <Item value="SSF Harvest" />
+      <Item value="SSF Hardcore Harvest" />
       <Item value="SSF Standard" />
       <Item value="SSF Hardcore" />
     </List>

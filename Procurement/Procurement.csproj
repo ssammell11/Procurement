@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Procurement</RootNamespace>
     <AssemblyName>Procurement</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -61,6 +61,7 @@
     <ApplicationIcon>Images\Procurement.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Google.Protobuf, Version=3.8.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604" />
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -109,6 +110,15 @@
     <Compile Include="Controls\FragmentStashTab.xaml.cs">
       <DependentUpon>FragmentStashTab.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utility\ClientLogFileEventArgs.cs" />
+    <Compile Include="Utility\ClientLogFileWatcher.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\FossilFilter.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\FracturedItemFilter.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\IncubatorFilter.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\ResonatorFilter.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\SynthesisedItemFilter.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\SimpleVisitor.cs" />
+    <Compile Include="ViewModel\ItemFilterUpdater.cs" />
     <Compile Include="ViewModel\Recipes\LoreweaveRecipe.cs" />
     <Compile Include="ViewModel\Recipes\VaalOrbRecipe.cs" />
     <Compile Include="ViewModel\TabViewModel\FragmentStashViewModel.cs" />
@@ -209,27 +219,14 @@
     <Compile Include="ViewModel\Filters\ForumExport\VeiledModFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\VeiledPrefixFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\VeiledSuffixFilter.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\CurrencyVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\DivineVesselVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\ElderItemVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\EssenceVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\FatedUniqueBaseTypeVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\FatedUniqueProphecyVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\FatedUniqueTargetVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\FatedUniqueVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\FullBestiaryOrbVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\IncursionVialVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\MirroredItemVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\OfferingVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\ProphecyVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\ScarabVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\ShaperItemVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\UnknownItemVisitor.cs" />
+    <Compile Include="ViewModel\ForumExportVisitors\SimpleVisitors.cs" />
     <Compile Include="ViewModel\ObservableBase.cs" />
     <Compile Include="ViewModel\Recipes\MatchedSet.cs" />
     <Compile Include="ViewModel\SetTabBuyoutViewModel.cs" />
     <Compile Include="ViewModel\TabViewModel\CommonTabViewModel.cs" />
+    <Compile Include="ViewModel\TabViewModel\TabContent.cs" />
     <Compile Include="ViewModel\TabViewModel\TabFactory.cs" />
+    <Compile Include="ViewModel\TabViewModel\TabVisuals.cs" />
     <Compile Include="ViewModel\TradeSettingsViewModel.cs" />
     <Compile Include="ViewModel\Cache\BitmapCache.cs" />
     <Compile Include="ViewModel\DisplayModeStrategy\DisplayModeFactory.cs" />
@@ -249,6 +246,8 @@
     <Compile Include="ViewModel\Filters\ForumExport\TypeLineFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\VaalFragmentFilter.cs" />
     <Compile Include="ViewModel\Filters\ForumExport\VaalUberFragmentFilter.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\ProphecyFragmentFilter.cs" />
+    <Compile Include="ViewModel\Filters\ForumExport\AtlasFragmentFilter.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\TypeLineVisitor.cs" />
     <Compile Include="ViewModel\PricingInfo.cs" />
     <Compile Include="ViewModel\SetBuyoutViewModel.cs" />
@@ -337,28 +336,20 @@
     <Compile Include="ViewModel\Filters\ForumExport\TwoHandedFilter.cs" />
     <Compile Include="ViewModel\Filters\UserSearchFilter.cs" />
     <Compile Include="ViewModel\ForumExportViewModel.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\AllGemVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\CorruptedGemVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\DualResVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\ExplicitModVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\GemVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\LeveledGemVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\LinksVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\MultipleBuyoutVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\SingleBuyoutVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\DropOnlyGemVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\GearVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\IGNVistior.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\IVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\LastUpdatedVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\MagicFindVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\MapVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\PopularGemsVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\QualityGemVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\SixSocketVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\StashVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\TripResVisitor.cs" />
-    <Compile Include="ViewModel\ForumExportVisitors\UniquesVisitor.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\VisitorBase.cs" />
     <Compile Include="ViewModel\ForumExportVisitors\XHandedVisitor.cs" />
     <Compile Include="ViewModel\ForumTemplateViewModel.cs" />
@@ -399,6 +390,7 @@
     </Compile>
     <Compile Include="View\Converters\CharacterToImageConverter.cs" />
     <Compile Include="View\Converters\CharacterToLevelConverter.cs" />
+    <Compile Include="View\Converters\CurrencyCraftingSlotScalingConverter.cs" />
     <Compile Include="View\Converters\FilterListToNameConverter.cs" />
     <Compile Include="View\Converters\ItemDisplayConverter.cs" />
     <Compile Include="View\Converters\ItemExplicitModsToFormattedRunConverter.cs" />
@@ -610,6 +602,10 @@
       <Project>{9841DD07-224D-4534-B9D1-F934C1D7BC73}</Project>
       <Name>POEApi.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\POEApi.Transport\POEApi.Transport.csproj">
+      <Project>{5933C062-45EA-4BC3-9AE9-0D6CFC26D505}</Project>
+      <Name>POEApi.Transport</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
@@ -793,6 +789,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\fragmentTab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ItemHover\FracturedIconAdorner.png" />
+    <Resource Include="Images\ItemHover\SynthesisedIconAdorner.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
